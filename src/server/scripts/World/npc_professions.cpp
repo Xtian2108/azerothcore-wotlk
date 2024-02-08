@@ -48,13 +48,7 @@ there is no difference here (except that default text is chosen with `gameobject
 #define TALK_AXE_UNLEARN            "Forgetting your Axesmithing skill is not something to do lightly. If you choose to abandon it you will forget all recipes that require Axesmithing to create!"
 #define TALK_SWORD_UNLEARN          "Forgetting your Swordsmithing skill is not something to do lightly. If you choose to abandon it you will forget all recipes that require Swordsmithing to create!"
 
-/*###
-# generic defines
-###*/
 
-#define GOSSIP_SENDER_LEARN         50
-#define GOSSIP_SENDER_UNLEARN       51
-#define GOSSIP_SENDER_CHECK         52
 
 /*###
 # gossip item and box texts
@@ -102,6 +96,18 @@ there is no difference here (except that default text is chosen with `gameobject
 
 #define BOX_UNLEARN_ENGIN_SPEC     "Do you really want to unlearn your engineering specialty and lose all associated recipes? \n Cost: "
 #define BOX_LEARN_ENGIN_SPEC     "Do you really want to learn this engineering specialty? \n Cost: "
+
+/*###
+# generic defines
+###*/
+
+enum GossipSender
+{
+    GOSSIP_SENDER_LEARN         =50,
+    GOSSIP_SENDER_UNLEARN       =51,
+    GOSSIP_SENDER_CHECK         =52
+};
+
 
 /*###
 # spells defines
@@ -867,9 +873,14 @@ enum EngineeringTrinkets
     SPELL_TO_TOSHLEY            = 36955,
 };
 
-#define GOSSIP_ITEM_ZAP         "This Dimensional Imploder sounds dangerous! How can I make one?"
-#define GOSSIP_ITEM_JHORDY      "I must build a beacon for this marvelous device!"
+
 #define GOSSIP_ITEM_KABLAM      "[PH] Unknown"
+#define GOSSIP_ITEM_SMILES      "[PH] Unknown"
+
+enum GossipEngineeringItems {
+    GOSSIP_ITEM_ZAP             = 21894,
+    GOSSIP_ITEM_JHORDY          = 21895
+};
 
 class npc_engineering_tele_trinket : public CreatureScript
 {
@@ -918,7 +929,7 @@ public:
                 case NPC_SMILES:
                     canLearn = CanLearn(player, 10363, 0, 350, S_GNOMISH, SPELL_TO_TOSHLEY, npcTextId);
                     if (canLearn)
-                        gossipItem = GOSSIP_ITEM_KABLAM;
+                        gossipItem = GOSSIP_ITEM_SMILES;
                     break;
             }
         }
